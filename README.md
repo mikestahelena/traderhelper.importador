@@ -1,2 +1,2 @@
 # traderhelper.importador
-Projeto para importação de arquivos de histórico da Bovespa. SpringBoot + SpringData
+Projeto para importação de arquivos de cotação histórica da Bovespa. SpringBoot + SpringData
