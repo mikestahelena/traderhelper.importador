@@ -5,6 +5,8 @@ import br.com.traderhelper.importador.dao.CotacaoRepository;
 import br.com.traderhelper.importador.entity.Acao;
 import br.com.traderhelper.importador.entity.Cotacao;
 import br.com.traderhelper.importador.service.PreparaDados;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ import java.util.List;
 @Service
 public class PreparaDadosImpl implements PreparaDados {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     AcaoRepository acaoRepository;
 
@@ -26,8 +30,12 @@ public class PreparaDadosImpl implements PreparaDados {
     public void calcularPercentualDeVariacao() {
 
         List<Acao> acoes = acaoRepository.findAll();
+        logger.info("Ações encontradas: " + acoes.toString());
+
         for (Acao a : acoes) {
             List<Cotacao> cotacoesPorAcao = cotacaoRepository.findByAcaoId(a.getId());
+            logger.info("Cotações encontradas para  " + a.getCodigoPapel() + ":" + cotacoesPorAcao.size());
+
             for (int i = 0; i < cotacoesPorAcao.size(); i++) {
                 if (i == 0) {
                     cotacoesPorAcao.get(i).setVariacaoPercentualDiaAnterior(BigDecimal.ZERO);
@@ -52,7 +60,7 @@ public class PreparaDadosImpl implements PreparaDados {
             try {
                 cotacaoRepository.batchMerge(cotacoesPorAcao);
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error("Erro ao persistir.", e);
             }
         }
     }
