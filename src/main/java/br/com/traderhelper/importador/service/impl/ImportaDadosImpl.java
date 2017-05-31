@@ -102,7 +102,7 @@ public class ImportaDadosImpl implements ImportaDados {
             throw e;
         }
 
-        logger.info("INICIANDO ATUALIZAÇÃO DOS DADOS:");
+        /*logger.info("INICIANDO ATUALIZAÇÃO DOS DADOS:");
         for (Acao a : listaAcoes) {
             a.setCotacoes(cotacaoRepository.findByAcaoId(a.getId()));
             for (int i = 0; i < a.getCotacoes().size(); i++) {
@@ -131,7 +131,7 @@ public class ImportaDadosImpl implements ImportaDados {
             } catch (Exception e) {
                 logger.error("Erro ao atualizar dados:", e);
             }
-        }
+        }*/
     }
 
     private void gerarListasAcaoCotacao(List<RegistroCotacaoDiaria> registroCotacaoDiariaList) {

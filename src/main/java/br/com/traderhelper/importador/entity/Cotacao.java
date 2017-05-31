@@ -93,7 +93,7 @@ public class Cotacao implements Serializable {
     private BigDecimal precoPontosOpcoes;
 
     //VARPDA - VARIAÇÃO PERCENTUAL EM RELAÇÃO AO DIA ANTERIOR
-    @Column(name = "VARPDA", precision = 6, scale = 2)
+    @Column(name = "VARPDA", precision = 10, scale = 2)
     private BigDecimal variacaoPercentualDiaAnterior;
 
     //VARCDA - VARIAÇÃO EM CENTAVOS EM RELAÇÃO AO DIA ANTERIOR
