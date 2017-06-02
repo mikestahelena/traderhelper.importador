@@ -1,11 +1,11 @@
-package br.com.traderhelper.importador.domain;
+package br.com.traderhelper.importador.domain.acoes;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
  * Created by Michael Sta. Helena on 13/12/2016.
  */
-public class RegistroCotacaoDiaria {
+public class RegistroCotacaoDiariaAcao {
     //TIPREG - TIPO DE REGISTRO
     private String TIPREG;
     //DATA DO PREGÃO
@@ -490,35 +490,35 @@ public class RegistroCotacaoDiaria {
             return this;
         }
 
-        public RegistroCotacaoDiaria build() {
-            RegistroCotacaoDiaria registroCotacaoDiaria = new RegistroCotacaoDiaria();
-            registroCotacaoDiaria.setTIPREG(TIPREG);
-            registroCotacaoDiaria.setDATAPG(DATAPG);
-            registroCotacaoDiaria.setCODBDI(CODBDI);
-            registroCotacaoDiaria.setCODNEG(CODNEG);
-            registroCotacaoDiaria.setTPMERC(TPMERC);
-            registroCotacaoDiaria.setNOMRES(NOMRES);
-            registroCotacaoDiaria.setESPECI(ESPECI);
-            registroCotacaoDiaria.setPRAZOT(PRAZOT);
-            registroCotacaoDiaria.setMODREF(MODREF);
-            registroCotacaoDiaria.setPREABE(PREABE);
-            registroCotacaoDiaria.setPREMAX(PREMAX);
-            registroCotacaoDiaria.setPREMIN(PREMIN);
-            registroCotacaoDiaria.setPREMED(PREMED);
-            registroCotacaoDiaria.setPREULT(PREULT);
-            registroCotacaoDiaria.setPREOFC(PREOFC);
-            registroCotacaoDiaria.setPREOFV(PREOFV);
-            registroCotacaoDiaria.setTOTNEG(TOTNEG);
-            registroCotacaoDiaria.setQUATOT(QUATOT);
-            registroCotacaoDiaria.setVOLTOT(VOLTOT);
-            registroCotacaoDiaria.setPREEXE(PREEXE);
-            registroCotacaoDiaria.setINDOPC(INDOPC);
-            registroCotacaoDiaria.setDATVEN(DATVEN);
-            registroCotacaoDiaria.setFATCOT(FATCOT);
-            registroCotacaoDiaria.setPTOEXE(PTOEXE);
-            registroCotacaoDiaria.setCODISI(CODISI);
-            registroCotacaoDiaria.setDISMES(DISMES);
-            return registroCotacaoDiaria;
+        public RegistroCotacaoDiariaAcao build() {
+            RegistroCotacaoDiariaAcao registroCotacaoDiariaAcao = new RegistroCotacaoDiariaAcao();
+            registroCotacaoDiariaAcao.setTIPREG(TIPREG);
+            registroCotacaoDiariaAcao.setDATAPG(DATAPG);
+            registroCotacaoDiariaAcao.setCODBDI(CODBDI);
+            registroCotacaoDiariaAcao.setCODNEG(CODNEG);
+            registroCotacaoDiariaAcao.setTPMERC(TPMERC);
+            registroCotacaoDiariaAcao.setNOMRES(NOMRES);
+            registroCotacaoDiariaAcao.setESPECI(ESPECI);
+            registroCotacaoDiariaAcao.setPRAZOT(PRAZOT);
+            registroCotacaoDiariaAcao.setMODREF(MODREF);
+            registroCotacaoDiariaAcao.setPREABE(PREABE);
+            registroCotacaoDiariaAcao.setPREMAX(PREMAX);
+            registroCotacaoDiariaAcao.setPREMIN(PREMIN);
+            registroCotacaoDiariaAcao.setPREMED(PREMED);
+            registroCotacaoDiariaAcao.setPREULT(PREULT);
+            registroCotacaoDiariaAcao.setPREOFC(PREOFC);
+            registroCotacaoDiariaAcao.setPREOFV(PREOFV);
+            registroCotacaoDiariaAcao.setTOTNEG(TOTNEG);
+            registroCotacaoDiariaAcao.setQUATOT(QUATOT);
+            registroCotacaoDiariaAcao.setVOLTOT(VOLTOT);
+            registroCotacaoDiariaAcao.setPREEXE(PREEXE);
+            registroCotacaoDiariaAcao.setINDOPC(INDOPC);
+            registroCotacaoDiariaAcao.setDATVEN(DATVEN);
+            registroCotacaoDiariaAcao.setFATCOT(FATCOT);
+            registroCotacaoDiariaAcao.setPTOEXE(PTOEXE);
+            registroCotacaoDiariaAcao.setCODISI(CODISI);
+            registroCotacaoDiariaAcao.setDISMES(DISMES);
+            return registroCotacaoDiariaAcao;
         }
     }
 }

@@ -10,13 +10,22 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "app")
 public class AppProperties {
 
-    private String path;
+    private String pathBovespa;
+    private String pathCommodity;
 
-    public String getPath() {
-        return path;
+    public String getPathBovespa() {
+        return pathBovespa;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setPathBovespa(String pathBovespa) {
+        this.pathBovespa = pathBovespa;
+    }
+
+    public String getPathCommodity() {
+        return pathCommodity;
+    }
+
+    public void setPathCommodity(String pathCommodity) {
+        this.pathCommodity = pathCommodity;
     }
 }

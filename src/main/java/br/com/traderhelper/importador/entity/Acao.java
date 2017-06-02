@@ -54,7 +54,7 @@ public class Acao implements Serializable {
     private String numeroDistribuicaoPapel;
 
     @OneToMany(mappedBy = "acao", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Cotacao> cotacoes;
+    private List<AcaoCotacao> cotacoes;
 
     public Acao() {
     }
@@ -135,11 +135,11 @@ public class Acao implements Serializable {
         this.numeroDistribuicaoPapel = numeroDistribuicaoPapel;
     }
 
-    public List<Cotacao> getCotacoes() {
+    public List<AcaoCotacao> getCotacoes() {
         return cotacoes;
     }
 
-    public void setCotacoes(List<Cotacao> cotacoes) {
+    public void setCotacoes(List<AcaoCotacao> cotacoes) {
         this.cotacoes = cotacoes;
     }
 

@@ -1,7 +1,7 @@
 package br.com.traderhelper.importador.entity.builder;
 
 import br.com.traderhelper.importador.entity.Acao;
-import br.com.traderhelper.importador.entity.Cotacao;
+import br.com.traderhelper.importador.entity.AcaoCotacao;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public final class AcaoBuilder {
     private String codigoIsin;
     //DISMES - NÚMERO DE DISTRIBUIÇÃO DO PAPEL
     private String numeroDistribuicaoPapel;
-    private List<Cotacao> cotacoes;
+    private List<AcaoCotacao> cotacoes;
 
     public static AcaoBuilder anAcao() {
         return new AcaoBuilder();
@@ -77,7 +77,7 @@ public final class AcaoBuilder {
         return this;
     }
 
-    public AcaoBuilder withCotacoes(List<Cotacao> cotacoes) {
+    public AcaoBuilder withCotacoes(List<AcaoCotacao> cotacoes) {
         this.cotacoes = cotacoes;
         return this;
     }

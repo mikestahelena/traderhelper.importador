@@ -1,10 +1,10 @@
 package br.com.traderhelper.importador.service.impl;
 
 
-import br.com.traderhelper.importador.domain.CotacaoHistorica;
-import br.com.traderhelper.importador.domain.RegistroCotacaoDiaria;
-import br.com.traderhelper.importador.domain.RegistroTrailer;
-import br.com.traderhelper.importador.service.LeitorArquivoCotacaoHistorica;
+import br.com.traderhelper.importador.domain.acoes.CotacaoHistoricaAcao;
+import br.com.traderhelper.importador.domain.acoes.RegistroCotacaoDiariaAcao;
+import br.com.traderhelper.importador.domain.acoes.RegistroTrailer;
+import br.com.traderhelper.importador.service.LeitorArquivoCotacaoHistoricaAcao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import java.util.List;
  * Created by Michael Sta. Helena on 13/12/2016.
  */
 @Service
-public class LeitorArquivoCotacaoHistoricaImpl implements LeitorArquivoCotacaoHistorica {
+public class LeitorArquivoCotacaoHistoricaAcaoImpl implements LeitorArquivoCotacaoHistoricaAcao {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -73,9 +73,9 @@ public class LeitorArquivoCotacaoHistoricaImpl implements LeitorArquivoCotacaoHi
         return Arrays.asList(acoes);
     }
 
-    public List<CotacaoHistorica> lerTodosArquivosCotacaoHistorica(Path path) throws IOException {
+    public List<CotacaoHistoricaAcao> lerTodosArquivosCotacaoHistorica(Path path) throws IOException {
         List<Path> files = new ArrayList<>();
-        List<CotacaoHistorica> cotacoes = new ArrayList<>();
+        List<CotacaoHistoricaAcao> cotacoes = new ArrayList<>();
         try (DirectoryStream<Path> stream = Files.newDirectoryStream(path)) {
             for (Path entry : stream) {
                 files.add(entry);
@@ -87,32 +87,32 @@ public class LeitorArquivoCotacaoHistoricaImpl implements LeitorArquivoCotacaoHi
         return cotacoes;
     }
 
-    public CotacaoHistorica lerArquivoCotacaoHistorica(Path caminho) throws IOException {
+    public CotacaoHistoricaAcao lerArquivoCotacaoHistorica(Path caminho) throws IOException {
         List<String> linhasArquivo = Files.readAllLines(caminho, Charset.forName("ISO-8859-1"));
         logger.info("Arquivo lido. Quantidade de registros:" + linhasArquivo.size());
-        logger.info("Gerando objeto de CotacaoHistorica...");
-        CotacaoHistorica cotacaoHistorica = lerLinhas(linhasArquivo);
-        logger.info("CotacaoHistorica finalizado. Quantidade de registros:" + cotacaoHistorica.getRegistroCotacaoDiariaList().size());
-        return cotacaoHistorica;
+        logger.info("Gerando objeto de CotacaoHistoricaAcao...");
+        CotacaoHistoricaAcao cotacaoHistoricaAcao = lerLinhas(linhasArquivo);
+        logger.info("CotacaoHistoricaAcao finalizado. Quantidade de registros:" + cotacaoHistoricaAcao.getRegistroCotacaoDiariaAcaoList().size());
+        return cotacaoHistoricaAcao;
     }
 
-    private CotacaoHistorica lerLinhas(List<String> lines) {
-        CotacaoHistorica cotacaoHistorica = new CotacaoHistorica();
+    private CotacaoHistoricaAcao lerLinhas(List<String> lines) {
+        CotacaoHistoricaAcao cotacaoHistoricaAcao = new CotacaoHistoricaAcao();
         for (String linha : lines) {
-            lerRegistros(linha, cotacaoHistorica);
+            lerRegistros(linha, cotacaoHistoricaAcao);
         }
-        return cotacaoHistorica;
+        return cotacaoHistoricaAcao;
     }
 
-    private void lerRegistros(String linha, CotacaoHistorica cotacaoHistorica) {
+    private void lerRegistros(String linha, CotacaoHistoricaAcao cotacaoHistoricaAcao) {
         final String tipReg = trataValores(linha.substring(1 - 1, 2));
         final String codNeg = trataValores(linha.substring(13 - 1, 24));
         if (CODIGO_REGISTRO_COTACAO_DIARIA.equals(tipReg)) {
             if (isAcaoCarteiraBovespa(codNeg)) {
-                cotacaoHistorica.addCotacaoDiaria(setDadosRegistroCotacaoDiaria(linha));
+                cotacaoHistoricaAcao.addCotacaoDiaria(setDadosRegistroCotacaoDiaria(linha));
             }
         } else if (CODIGO_REGISTRO_TRAILER.equals(tipReg)) {
-            cotacaoHistorica.setRegistroTrailer(setDadosRegistroTrailer(linha));
+            cotacaoHistoricaAcao.setRegistroTrailer(setDadosRegistroTrailer(linha));
         }
     }
 
@@ -135,8 +135,8 @@ public class LeitorArquivoCotacaoHistoricaImpl implements LeitorArquivoCotacaoHi
         return registroTrailer;
     }
 
-    private RegistroCotacaoDiaria setDadosRegistroCotacaoDiaria(String s) {
-        return new RegistroCotacaoDiaria.RegistroCotacaoDiariaBuilder()
+    private RegistroCotacaoDiariaAcao setDadosRegistroCotacaoDiaria(String s) {
+        return new RegistroCotacaoDiariaAcao.RegistroCotacaoDiariaBuilder()
                 //TIPREG - TIPO DE REGISTRO
                 .withTIPREG(CODIGO_REGISTRO_COTACAO_DIARIA)//trataValores(s.substring(1 - 1, 2)));
                 //DATA DO PREGÃO

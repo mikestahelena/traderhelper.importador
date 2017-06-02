@@ -10,8 +10,8 @@ import java.util.Date;
  * Created by Michael Sta. Helena on 13/12/2016.
  */
 @Entity
-@Table(name = "COTACAO")
-public class Cotacao implements Serializable {
+@Table(name = "ACAO_COTACAO")
+public class AcaoCotacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -100,7 +100,7 @@ public class Cotacao implements Serializable {
     @Column(name = "VARCDA", precision = 10, scale = 2)
     private BigDecimal variacaoCentavosDiaAnterior;
 
-    public Cotacao() {
+    public AcaoCotacao() {
     }
 
     public static long getSerialVersionUID() {
@@ -280,9 +280,9 @@ public class Cotacao implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Cotacao cotacao = (Cotacao) o;
+        AcaoCotacao acaoCotacao = (AcaoCotacao) o;
 
-        return id.equals(cotacao.id);
+        return id.equals(acaoCotacao.id);
 
     }
 
@@ -293,7 +293,7 @@ public class Cotacao implements Serializable {
 
     @Override
     public String toString() {
-        return "Cotacao{" +
+        return "AcaoCotacao{" +
                 "id=" + id +
                 ", acao=" + acao +
                 ", dataPregao=" + dataPregao +

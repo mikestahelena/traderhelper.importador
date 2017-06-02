@@ -1,7 +1,7 @@
 package br.com.traderhelper.importador.entity.builder;
 
 import br.com.traderhelper.importador.entity.Acao;
-import br.com.traderhelper.importador.entity.Cotacao;
+import br.com.traderhelper.importador.entity.AcaoCotacao;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Created by Michael Sta. Helena on 26/12/2016.
  */
-public final class CotacaoBuilder {
+public final class AcaoCotacaoBuilder {
     private Long id;
     private Acao acao;
     private Date dataPregao;
@@ -47,126 +47,126 @@ public final class CotacaoBuilder {
     //PTOEXE - PREÇO DE EXERCÍCIO EM PONTOS PARA OPÇÕES REFERENCIADAS EM DÓLAR OU VALOR DE CONTRATO EM PONTOS PARA TERMO SECUNDÁRIO
     private BigDecimal precoPontosOpcoes;
 
-    public static CotacaoBuilder aCotacao() {
-        return new CotacaoBuilder();
+    public static AcaoCotacaoBuilder aCotacao() {
+        return new AcaoCotacaoBuilder();
     }
 
-    public CotacaoBuilder withId(Long id) {
+    public AcaoCotacaoBuilder withId(Long id) {
         this.id = id;
         return this;
     }
 
-    public CotacaoBuilder withAcao(Acao acao) {
+    public AcaoCotacaoBuilder withAcao(Acao acao) {
         this.acao = acao;
         return this;
     }
 
-    public CotacaoBuilder withDataPregao(Date dataPregao) {
+    public AcaoCotacaoBuilder withDataPregao(Date dataPregao) {
         this.dataPregao = dataPregao;
         return this;
     }
 
-    public CotacaoBuilder withPrecoAbertura(BigDecimal precoAbertura) {
+    public AcaoCotacaoBuilder withPrecoAbertura(BigDecimal precoAbertura) {
         this.precoAbertura = precoAbertura;
         return this;
     }
 
-    public CotacaoBuilder withPrecoMaximo(BigDecimal precoMaximo) {
+    public AcaoCotacaoBuilder withPrecoMaximo(BigDecimal precoMaximo) {
         this.precoMaximo = precoMaximo;
         return this;
     }
 
-    public CotacaoBuilder withPrecoMinimo(BigDecimal precoMinimo) {
+    public AcaoCotacaoBuilder withPrecoMinimo(BigDecimal precoMinimo) {
         this.precoMinimo = precoMinimo;
         return this;
     }
 
-    public CotacaoBuilder withPrecoMedio(BigDecimal precoMedio) {
+    public AcaoCotacaoBuilder withPrecoMedio(BigDecimal precoMedio) {
         this.precoMedio = precoMedio;
         return this;
     }
 
-    public CotacaoBuilder withPrecoUltimoNegocio(BigDecimal precoUltimoNegocio) {
+    public AcaoCotacaoBuilder withPrecoUltimoNegocio(BigDecimal precoUltimoNegocio) {
         this.precoUltimoNegocio = precoUltimoNegocio;
         return this;
     }
 
-    public CotacaoBuilder withPrecoMelhorOfertaCompra(BigDecimal precoMelhorOfertaCompra) {
+    public AcaoCotacaoBuilder withPrecoMelhorOfertaCompra(BigDecimal precoMelhorOfertaCompra) {
         this.precoMelhorOfertaCompra = precoMelhorOfertaCompra;
         return this;
     }
 
-    public CotacaoBuilder withPrecoMelhorOfertaVenda(BigDecimal precoMelhorOfertaVenda) {
+    public AcaoCotacaoBuilder withPrecoMelhorOfertaVenda(BigDecimal precoMelhorOfertaVenda) {
         this.precoMelhorOfertaVenda = precoMelhorOfertaVenda;
         return this;
     }
 
-    public CotacaoBuilder withTotalNegociosEfetuados(BigInteger totalNegociosEfetuados) {
+    public AcaoCotacaoBuilder withTotalNegociosEfetuados(BigInteger totalNegociosEfetuados) {
         this.totalNegociosEfetuados = totalNegociosEfetuados;
         return this;
     }
 
-    public CotacaoBuilder withTotalTitulosNegociados(BigInteger totalTitulosNegociados) {
+    public AcaoCotacaoBuilder withTotalTitulosNegociados(BigInteger totalTitulosNegociados) {
         this.totalTitulosNegociados = totalTitulosNegociados;
         return this;
     }
 
-    public CotacaoBuilder withVolumeTitulosNegociados(BigDecimal volumeTitulosNegociados) {
+    public AcaoCotacaoBuilder withVolumeTitulosNegociados(BigDecimal volumeTitulosNegociados) {
         this.volumeTitulosNegociados = volumeTitulosNegociados;
         return this;
     }
 
-    public CotacaoBuilder withPrecoExercicio(BigDecimal precoExercicio) {
+    public AcaoCotacaoBuilder withPrecoExercicio(BigDecimal precoExercicio) {
         this.precoExercicio = precoExercicio;
         return this;
     }
 
-    public CotacaoBuilder withPrazoDiasMercadoTermo(BigInteger prazoDiasMercadoTermo) {
+    public AcaoCotacaoBuilder withPrazoDiasMercadoTermo(BigInteger prazoDiasMercadoTermo) {
         this.prazoDiasMercadoTermo = prazoDiasMercadoTermo;
         return this;
     }
 
-    public CotacaoBuilder withMoedaReferencia(String moedaReferencia) {
+    public AcaoCotacaoBuilder withMoedaReferencia(String moedaReferencia) {
         this.moedaReferencia = moedaReferencia;
         return this;
     }
 
-    public CotacaoBuilder withDataVencimentoOpcoes(String dataVencimentoOpcoes) {
+    public AcaoCotacaoBuilder withDataVencimentoOpcoes(String dataVencimentoOpcoes) {
         this.dataVencimentoOpcoes = dataVencimentoOpcoes;
         return this;
     }
 
-    public CotacaoBuilder withFatorCotacao(String fatorCotacao) {
+    public AcaoCotacaoBuilder withFatorCotacao(String fatorCotacao) {
         this.fatorCotacao = fatorCotacao;
         return this;
     }
 
-    public CotacaoBuilder withPrecoPontosOpcoes(BigDecimal precoPontosOpcoes) {
+    public AcaoCotacaoBuilder withPrecoPontosOpcoes(BigDecimal precoPontosOpcoes) {
         this.precoPontosOpcoes = precoPontosOpcoes;
         return this;
     }
 
-    public Cotacao build() {
-        Cotacao cotacao = new Cotacao();
-        cotacao.setId(id);
-        cotacao.setAcao(acao);
-        cotacao.setDataPregao(dataPregao);
-        cotacao.setPrecoAbertura(precoAbertura);
-        cotacao.setPrecoMaximo(precoMaximo);
-        cotacao.setPrecoMinimo(precoMinimo);
-        cotacao.setPrecoMedio(precoMedio);
-        cotacao.setPrecoUltimoNegocio(precoUltimoNegocio);
-        cotacao.setPrecoMelhorOfertaCompra(precoMelhorOfertaCompra);
-        cotacao.setPrecoMelhorOfertaVenda(precoMelhorOfertaVenda);
-        cotacao.setTotalNegociosEfetuados(totalNegociosEfetuados);
-        cotacao.setTotalTitulosNegociados(totalTitulosNegociados);
-        cotacao.setVolumeTitulosNegociados(volumeTitulosNegociados);
-        cotacao.setPrecoExercicio(precoExercicio);
-        cotacao.setPrazoDiasMercadoTermo(prazoDiasMercadoTermo);
-        cotacao.setMoedaReferencia(moedaReferencia);
-        cotacao.setDataVencimentoOpcoes(dataVencimentoOpcoes);
-        cotacao.setFatorCotacao(fatorCotacao);
-        cotacao.setPrecoPontosOpcoes(precoPontosOpcoes);
-        return cotacao;
+    public AcaoCotacao build() {
+        AcaoCotacao acaoCotacao = new AcaoCotacao();
+        acaoCotacao.setId(id);
+        acaoCotacao.setAcao(acao);
+        acaoCotacao.setDataPregao(dataPregao);
+        acaoCotacao.setPrecoAbertura(precoAbertura);
+        acaoCotacao.setPrecoMaximo(precoMaximo);
+        acaoCotacao.setPrecoMinimo(precoMinimo);
+        acaoCotacao.setPrecoMedio(precoMedio);
+        acaoCotacao.setPrecoUltimoNegocio(precoUltimoNegocio);
+        acaoCotacao.setPrecoMelhorOfertaCompra(precoMelhorOfertaCompra);
+        acaoCotacao.setPrecoMelhorOfertaVenda(precoMelhorOfertaVenda);
+        acaoCotacao.setTotalNegociosEfetuados(totalNegociosEfetuados);
+        acaoCotacao.setTotalTitulosNegociados(totalTitulosNegociados);
+        acaoCotacao.setVolumeTitulosNegociados(volumeTitulosNegociados);
+        acaoCotacao.setPrecoExercicio(precoExercicio);
+        acaoCotacao.setPrazoDiasMercadoTermo(prazoDiasMercadoTermo);
+        acaoCotacao.setMoedaReferencia(moedaReferencia);
+        acaoCotacao.setDataVencimentoOpcoes(dataVencimentoOpcoes);
+        acaoCotacao.setFatorCotacao(fatorCotacao);
+        acaoCotacao.setPrecoPontosOpcoes(precoPontosOpcoes);
+        return acaoCotacao;
     }
 }

@@ -1,9 +1,9 @@
 package br.com.traderhelper.importador.service.impl;
 
+import br.com.traderhelper.importador.dao.AcaoCotacaoRepository;
 import br.com.traderhelper.importador.dao.AcaoRepository;
-import br.com.traderhelper.importador.dao.CotacaoRepository;
 import br.com.traderhelper.importador.entity.Acao;
-import br.com.traderhelper.importador.entity.Cotacao;
+import br.com.traderhelper.importador.entity.AcaoCotacao;
 import br.com.traderhelper.importador.service.PreparaDados;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,7 @@ public class PreparaDadosImpl implements PreparaDados {
     AcaoRepository acaoRepository;
 
     @Autowired
-    CotacaoRepository cotacaoRepository;
+    AcaoCotacaoRepository acaoCotacaoRepository;
 
     @Transactional
     public void calcularPercentualDeVariacao() {
@@ -34,7 +34,7 @@ public class PreparaDadosImpl implements PreparaDados {
         List<Acao> acoes = acaoRepository.findAll();
 
         for (Acao a : acoes) {
-            List<Cotacao> cotacoesPorAcao = cotacaoRepository.findByAcaoId(a.getId());
+            List<AcaoCotacao> cotacoesPorAcao = acaoCotacaoRepository.findByAcaoId(a.getId());
             logger.info("Cotações encontradas para  " + a.getCodigoPapel() + ":" + cotacoesPorAcao.size());
             try {
                 for (int i = 0; i < cotacoesPorAcao.size(); i++) {
@@ -42,9 +42,9 @@ public class PreparaDadosImpl implements PreparaDados {
                         cotacoesPorAcao.get(i).setVariacaoPercentualDiaAnterior(BigDecimal.ZERO);
                         cotacoesPorAcao.get(i).setVariacaoCentavosDiaAnterior(BigDecimal.ZERO);
                     } else {
-                        Cotacao cotacaoAnterior = cotacoesPorAcao.get(i - 1);
+                        AcaoCotacao acaoCotacaoAnterior = cotacoesPorAcao.get(i - 1);
 
-                        BigDecimal precoUltimoNegocioCotacaoAnterior = cotacaoAnterior.getPrecoUltimoNegocio();
+                        BigDecimal precoUltimoNegocioCotacaoAnterior = acaoCotacaoAnterior.getPrecoUltimoNegocio();
                         BigDecimal precoUltimoNegocioCotacao = cotacoesPorAcao.get(i).getPrecoUltimoNegocio();
 
                         BigDecimal percentualVariacao = precoUltimoNegocioCotacao
@@ -62,7 +62,7 @@ public class PreparaDadosImpl implements PreparaDados {
                 logger.error("Erro ao calcular variacao: " + a.getCodigoPapel(), e);
             }
             try {
-                cotacaoRepository.batchMerge(cotacoesPorAcao);
+                acaoCotacaoRepository.batchMerge(cotacoesPorAcao);
             } catch (Exception e) {
                 logger.error("Erro ao persistir.", e);
             }
