@@ -7,5 +7,5 @@ import java.io.IOException;
  */
 public interface ImportaDados {
 
-    void iniciarImportacao() throws IOException;
+	void iniciarImportacao() throws IOException;
 }

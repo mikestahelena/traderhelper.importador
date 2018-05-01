@@ -1,7 +1,8 @@
 package br.com.traderhelper.importador.dao;
 
-
 import br.com.traderhelper.importador.entity.Acao;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,21 +14,7 @@ import java.util.List;
 @Repository
 public interface AcaoRepository extends CrudRepository<Acao, Long>, AcaoRepositoryCustom {
 
-    Acao save(Acao acao);
+	@Cacheable("acoes")
+	List<Acao> findAll();
 
-    Acao findOne(Long id);
-
-    boolean exists(Long id);
-
-    List<Acao> findAll();
-
-    long count();
-
-    void delete(Long id);
-
-    void delete(Acao acao);
-
-    void deleteAll();
-
-    Acao findByCodigoPapel(String codigo);
 }

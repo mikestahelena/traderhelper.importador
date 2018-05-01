@@ -14,20 +14,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class Start implements CommandLineRunner {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    ImportaDados importaDados;
+	@Autowired
+	ImportaDados importaDados;
 
-    @Autowired
-    PreparaDados preparaDados;
+	@Autowired
+	PreparaDados preparaDados;
 
-    public void run(String... args) {
-        try {
-            importaDados.iniciarImportacao();
-            preparaDados.calcularPercentualDeVariacao();
-        } catch (Exception e) {
-            logger.error("Erro ao iniciar importação dos dados: ", e);
-        }
-    }
+	public void run(String... args) {
+		try {
+			importaDados.iniciarImportacao();
+			preparaDados.calcularPercentualDeVariacao();
+		} catch (Exception e) {
+			logger.error("Erro ao iniciar importação dos dados: ", e);
+		}
+	}
 }

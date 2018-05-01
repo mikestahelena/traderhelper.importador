@@ -11,5 +11,5 @@ import java.util.List;
  */
 public interface LeitorArquivoCotacaoHistoricaCommodity {
 
-    List<CotacaoHistoricaCommodity> lerTodosArquivosCotacaoHistorica(Path path) throws IOException;
+	List<CotacaoHistoricaCommodity> lerTodosArquivosCotacaoHistorica(Path path) throws IOException;
 }

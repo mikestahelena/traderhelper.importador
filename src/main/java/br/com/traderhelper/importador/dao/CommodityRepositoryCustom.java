@@ -7,7 +7,7 @@ import java.util.List;
  */
 public interface CommodityRepositoryCustom {
 
-    void batchSave(List cotacoes);
+	void batchSave(List<?> cotacoes);
 
-    void batchMerge(List cotacoes);
+	void batchMerge(List<?> cotacoes);
 }

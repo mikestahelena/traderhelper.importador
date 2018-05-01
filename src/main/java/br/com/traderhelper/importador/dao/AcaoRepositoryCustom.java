@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface AcaoRepositoryCustom {
 
-    List<Acao> get();
+	List<Acao> get();
 
-    void batchSave(List acoes);
+	void batchSave(List<?> acoes);
 
-    void batchMerge(List acoes);
+	void batchMerge(List<?> acoes);
 }

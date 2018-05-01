@@ -15,14 +15,14 @@ import java.util.List;
  */
 public class AcaoRepositoryImpl extends BulkSaver implements AcaoRepositoryCustom {
 
-    @PersistenceContext
-    private EntityManager em;
+	@PersistenceContext
+	private EntityManager em;
 
-    public List<Acao> get() {
-        CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery<Acao> query = builder.createQuery(Acao.class);
-        Root<Acao> root = query.from(Acao.class);
+	public List<Acao> get() {
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Acao> query = builder.createQuery(Acao.class);
+		Root<Acao> root = query.from(Acao.class);
 
-        return em.createQuery(query.select(root)).getResultList();
-    }
+		return em.createQuery(query.select(root)).getResultList();
+	}
 }

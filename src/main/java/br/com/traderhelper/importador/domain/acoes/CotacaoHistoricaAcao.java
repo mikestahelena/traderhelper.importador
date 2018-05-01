@@ -8,29 +8,29 @@ import java.util.List;
  */
 public class CotacaoHistoricaAcao {
 
-    private List<RegistroCotacaoDiariaAcao> registroCotacaoDiariaAcaoList;
-    private RegistroTrailer registroTrailer;
+	private List<RegistroCotacaoDiariaAcao> registroCotacaoDiariaAcaoList;
+	private RegistroTrailer registroTrailer;
 
-    public List<RegistroCotacaoDiariaAcao> getRegistroCotacaoDiariaAcaoList() {
-        if (registroCotacaoDiariaAcaoList == null) {
-            registroCotacaoDiariaAcaoList = new ArrayList<>();
-        }
-        return registroCotacaoDiariaAcaoList;
-    }
+	public List<RegistroCotacaoDiariaAcao> getRegistroCotacaoDiariaAcaoList() {
+		if (registroCotacaoDiariaAcaoList == null) {
+			registroCotacaoDiariaAcaoList = new ArrayList<>();
+		}
+		return registroCotacaoDiariaAcaoList;
+	}
 
-    public void setRegistroCotacaoDiariaAcaoList(List<RegistroCotacaoDiariaAcao> registroCotacaoDiariaAcaoList) {
-        this.registroCotacaoDiariaAcaoList = registroCotacaoDiariaAcaoList;
-    }
+	public void setRegistroCotacaoDiariaAcaoList(List<RegistroCotacaoDiariaAcao> registroCotacaoDiariaAcaoList) {
+		this.registroCotacaoDiariaAcaoList = registroCotacaoDiariaAcaoList;
+	}
 
-    public RegistroTrailer getRegistroTrailer() {
-        return registroTrailer;
-    }
+	public RegistroTrailer getRegistroTrailer() {
+		return registroTrailer;
+	}
 
-    public void setRegistroTrailer(RegistroTrailer registroTrailer) {
-        this.registroTrailer = registroTrailer;
-    }
+	public void setRegistroTrailer(RegistroTrailer registroTrailer) {
+		this.registroTrailer = registroTrailer;
+	}
 
-    public void addCotacaoDiaria(RegistroCotacaoDiariaAcao registroCotacaoDiariaAcao) {
-        this.getRegistroCotacaoDiariaAcaoList().add(registroCotacaoDiariaAcao);
-    }
+	public void addCotacaoDiaria(RegistroCotacaoDiariaAcao registroCotacaoDiariaAcao) {
+		this.getRegistroCotacaoDiariaAcaoList().add(registroCotacaoDiariaAcao);
+	}
 }

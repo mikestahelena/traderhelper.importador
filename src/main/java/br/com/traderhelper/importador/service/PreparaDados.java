@@ -5,6 +5,6 @@ package br.com.traderhelper.importador.service;
  */
 public interface PreparaDados {
 
-    void calcularPercentualDeVariacao();
+	void calcularPercentualDeVariacao();
 
 }
