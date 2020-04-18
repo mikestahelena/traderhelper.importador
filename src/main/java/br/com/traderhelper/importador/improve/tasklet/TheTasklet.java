@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
@@ -25,8 +24,7 @@ public class TheTasklet implements Tasklet {
 	private TheRepository theRepository;
 
 	@Override
-	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
-			throws Exception {
+	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) {
 
         //List<String> lista = theRepository.findAllCodneg();
         //for(String codneg : lista) {

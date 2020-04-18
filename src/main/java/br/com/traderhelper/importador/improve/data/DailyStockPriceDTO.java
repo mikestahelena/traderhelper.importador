@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -14,7 +14,7 @@ public class DailyStockPriceDTO {
     // TIPREG - TIPO DE REGISTRO
     private String TIPREG;
     // DATA DO PREGÃO
-    private Date DATAPG;
+    private LocalDate DATAPG;
     // CODBDI - CÓDIGO BDI
     private String CODBDI;
     // CODNEG - CÓDIGO DE NEGOCIAÇÃO DO PAPEL

@@ -30,3 +30,5 @@ CREATE TABLE dsp (
 	codisi varchar(20) NULL,
 	dismes varchar(20) NULL
 );
+
+ALTER TABLE public.dsp ADD CONSTRAINT dsp_pk PRIMARY KEY (datapg,codneg,codbdi);

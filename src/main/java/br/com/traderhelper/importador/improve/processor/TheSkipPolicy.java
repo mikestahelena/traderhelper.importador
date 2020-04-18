@@ -12,13 +12,8 @@ public class TheSkipPolicy implements SkipPolicy {
 
     @Override
     public boolean shouldSkip(Throwable exception, int skipCount) throws SkipLimitExceededException {
-        if (exception instanceof TheException) {
-            //TheException e = (TheException) exception;
-            //log.info(String.format("%s - %s - %s",exception.getMessage(), e.getCODNEG(), e.getCODBDI()));
-            return true;
-        } else {
-            return false;
-        }
+        //TheException e = (TheException) exception;
+        //log.info(String.format("%s - %s - %s",exception.getMessage(), e.getCODNEG(), e.getCODBDI()));
+        return exception instanceof TheException;
     }
-
 }

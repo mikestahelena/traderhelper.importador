@@ -12,8 +12,8 @@ public class TheException extends RuntimeException {
 
     public TheException(String codbdi, String codneg, String message) {
         super(message);
-        this.CODBDI = codbdi;
-        this.CODNEG = codneg;
+        CODBDI = codbdi;
+        CODNEG = codneg;
     }
 
     public TheException(String message, Throwable cause) {

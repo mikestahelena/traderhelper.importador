@@ -3,8 +3,8 @@ package br.com.traderhelper.importador;
 import br.com.traderhelper.importador.improve.data.DailyStockPriceDTO;
 import br.com.traderhelper.importador.improve.processor.TheProcessor;
 import br.com.traderhelper.importador.improve.processor.TheSkipPolicy;
+import br.com.traderhelper.importador.improve.reader.TheMultiResourceReader;
 import br.com.traderhelper.importador.improve.reader.TheReader;
-//import br.com.traderhelper.importador.improve.tasklet.TheTasklet;
 import br.com.traderhelper.importador.improve.tasklet.TheTasklet;
 import br.com.traderhelper.importador.improve.writer.TheWriter;
 import org.springframework.batch.core.Job;
@@ -21,6 +21,8 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+//import br.com.traderhelper.importador.improve.tasklet.TheTasklet;
 
 @Configuration
 @EnableBatchProcessing
@@ -46,6 +48,9 @@ public class AppConfiguration {
     private TheReader theReader;
 
     @Autowired
+    private TheMultiResourceReader theMultiResourceReader;
+
+    @Autowired
     private TheProcessor theProcessor;
 
     @Autowired
@@ -54,28 +59,28 @@ public class AppConfiguration {
     @Autowired
     private TheSkipPolicy theSkipPolicy;
 
-    @Bean
+/*    @Bean
     public Step step1() {
         return stepBuilderFactory
                 .get(TRADER_HELPER_IMPORT)
                 .tasklet(theTasklet)
                 .build();
-    }
+    }*/
 
-    /*@Bean
-    public Step step2() {
+    @Bean
+    public Step step1() throws Exception {
         return stepBuilderFactory.get("step2")
                 .<String, DailyStockPriceDTO>chunk(chunkSize)
-                .reader(theReader)
+                .reader(theMultiResourceReader.read())
                 .processor(theProcessor)
                 .faultTolerant()
                 .skipPolicy(theSkipPolicy)
                 .writer(theWriter)
                 .build();
-    }*/
+    }
 
     @Bean
-    public Job job() {
+    public Job job() throws Exception {
         return jobBuilderFactory
                 .get(TRADER_HELPER_IMPORT)
                 .incrementer(new RunIdIncrementer())
