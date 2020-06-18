@@ -3,6 +3,7 @@ package br.com.traderhelper.importador.improve.processor;
 import br.com.traderhelper.importador.improve.data.DailyStockPriceDTO;
 import br.com.traderhelper.importador.improve.exception.TheException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.batch.core.configuration.annotation.StepScope;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Slf4j
 @StepScope
@@ -23,6 +25,8 @@ public class TheProcessor implements ItemProcessor<String, DailyStockPriceDTO> {
     private static final String TPMERC_TERMO = "30";
     private static final String CODBDI_FUNDOS_IMOBILIARIOS = "12";
     private static final String ESPECI_DIREITO_SUBSCRICAO = "DIR";
+    private static final String NUMBER_ZERO = "0";
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
     private static final String[] TICKERS = {"ABCB4", "ABEV3", "ALPA4", "ALSO3", "ALUP11", "AMAR3",
             "ARZZ3", "AZUL4", "B3SA3", "BBAS3", "BBDC3", "BBDC4",
             "BBSE3", "BEEF3", "BIDI11", "BIDI4", "BKBR3", "BPAC11",
@@ -49,24 +53,22 @@ public class TheProcessor implements ItemProcessor<String, DailyStockPriceDTO> {
             "UNIP6", "USIM5", "VALE3", "VIVT4", "VLID3", "VVAR3",
             "WEGE3", "WIZS3", "YDUQ3"};
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-
     @Override
     public DailyStockPriceDTO process(String in) {
 
         final String TIPREG = trataValores(in.substring(1 - 1, 2));
-        if(END_OF_FILE.equals(TIPREG)) {
+        if (END_OF_FILE.equals(TIPREG)) {
             throw new TheException("TRAILER");
         }
         final String CODBDI = trataValores(in.substring(11 - 1, 12));
         final String CODNEG = trataValores(in.substring(13 - 1, 24));
         final String ESPECI = trataValores(in.substring(40 - 1, 49));
-        if((!isCodnegImportable(CODNEG) && !isCodbdiImportable(CODBDI)) || !isEspeciImportable(ESPECI)) {
+        if ((!isCodnegImportable(CODNEG) && !isCodbdiImportable(CODBDI)) || !isEspeciImportable(ESPECI)) {
             throw new TheException(CODBDI, CODNEG, "NÃO IMPORTAR");
         }
 
         final String TPMERC = trataValores(in.substring(25 - 1, 27));
-        if(TPMERC_TERMO.equals(TPMERC)) {
+        if (TPMERC_TERMO.equals(TPMERC)) {
             throw new TheException(TPMERC, CODNEG, "TPMERC INVALIDO");
         }
 
@@ -111,7 +113,7 @@ public class TheProcessor implements ItemProcessor<String, DailyStockPriceDTO> {
                 .VOLTOT(getValorBigDecimal(trataValores(in.substring(171 - 1, 188), true)))
                 // PREEXE - PREÇO DE EXERCÍCIO PARA O MERCADO DE OPÇÕES OU VALOR DO CONTRATO
                 // PARA O MERCADO DE TERMO SECUNDÁRIO
-                .PREEXE(getValorBigDecimal(trataValores(in.substring(189 - 1, 201))))
+                .PREEXE(getValorBigDecimal(trataValores(in.substring(189 - 1, 201), true)))
                 // INDOPC - INDICADOR DE CORREÇÃO DE PREÇOS DE EXERCÍCIOS OU VALORES DE CONTRATO
                 // PARA OS MERCADOS DE OPÇÕES OU TERMO SECUNDÁRIO
                 .INDOPC(trataValores(in.substring(202 - 1, 202)))
@@ -149,17 +151,20 @@ public class TheProcessor implements ItemProcessor<String, DailyStockPriceDTO> {
     }
 
     private String trataValores(String valor, boolean isDecimal) {
-        valor = removeZerosAEsquerda(valor.trim());
-        if (isDecimal) {
-            valor = colocaPontoDecimalDuasCasas(valor);
+        valor = valor.trim();
+        if (StringUtils.isNumeric(valor)) {
+            valor = removeZerosAEsquerda(valor.trim());
+            if (isDecimal) {
+                valor = colocaPontoDecimalDuasCasas(valor);
+            }
         }
         return valor;
     }
 
     private String removeZerosAEsquerda(String valor) {
         if (valor != null) {
-            while (valor.startsWith("0") && valor.length() > 1) {
-                valor = valor.replaceFirst("0", "");
+            if (valor.startsWith(NUMBER_ZERO) && valor.length() > 1) {
+                valor = StringUtils.stripStart(valor, NUMBER_ZERO);
             }
         }
         return valor;
@@ -167,9 +172,7 @@ public class TheProcessor implements ItemProcessor<String, DailyStockPriceDTO> {
 
     private String colocaPontoDecimalDuasCasas(String valor) {
         if (valor != null) {
-            while (valor.length() < 3) {
-                valor = "0" + valor;
-            }
+            valor = StringUtils.leftPad(valor, 3, NUMBER_ZERO);
             int tam = valor.length();
             valor = valor.substring(0, tam - 2) + "." + valor.substring(tam - 2, tam);
         }
@@ -178,28 +181,22 @@ public class TheProcessor implements ItemProcessor<String, DailyStockPriceDTO> {
 
     private LocalDate getDateFromString(String datapg) {
         try {
-            return LocalDate.parse(datapg, formatter);
+            return LocalDate.parse(datapg, FORMATTER);
         } catch (DateTimeParseException e) {
-            e.printStackTrace();
+            log.info("Erro ao formatar data: {}", datapg);
         }
         return null;
     }
 
     private BigDecimal getValorBigDecimal(String valorString) {
-        if (valorString == null) {
-            return null;
-        }
-        if (valorString.isEmpty() || valorString.length() < 2) {
+        if (Objects.isNull(valorString) || valorString.isEmpty() || valorString.length() < 2) {
             return BigDecimal.ZERO;
         }
         return new BigDecimal(valorString);
     }
 
     private BigInteger getValorBigInteger(String valorString) {
-        if (valorString == null) {
-            return null;
-        }
-        if (valorString.isEmpty() || valorString.length() < 2) {
+        if (Objects.isNull(valorString) || valorString.isEmpty() || valorString.length() < 2) {
             return BigInteger.ZERO;
         }
         return new BigInteger(valorString);

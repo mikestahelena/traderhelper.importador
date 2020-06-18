@@ -5,10 +5,10 @@ import lombok.Getter;
 public class TheException extends RuntimeException {
 
     @Getter
-    private String CODBDI;
+    private final String CODBDI;
 
     @Getter
-    private String CODNEG;
+    private final String CODNEG;
 
     public TheException(String codbdi, String codneg, String message) {
         super(message);
@@ -19,10 +19,12 @@ public class TheException extends RuntimeException {
     public TheException(String message, Throwable cause) {
         super(message, cause);
         CODBDI = null;
+        CODNEG = null;
     }
 
     public TheException(String message) {
         super(message);
         CODBDI = null;
+        CODNEG = null;
     }
 }

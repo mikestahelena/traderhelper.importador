@@ -16,7 +16,7 @@ public class TheReader implements ItemReader<String> {
     private FlatFileItemReader<String> flatFileItemReader;
 
     @BeforeStep
-    public void before() throws Exception{
+    public void before() throws Exception {
         flatFileItemReader = new FlatFileItemReader<>();
         flatFileItemReader.setResource(new FileSystemResource("/home/michaelhelena/Área de Trabalho/bovespach/COTAHIST_A2020.TXT"));
         flatFileItemReader.setLinesToSkip(1);
